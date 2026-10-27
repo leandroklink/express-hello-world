@@ -13,7 +13,7 @@ app.get('/req', (req, res) => {
 })
 app.get("/meunome", (req, res) => res.type('html').send(meuNome));
 
-app.get("tico", (req, res) => res.type('html').send(teco));
+app.get("/tico", (req, res) => res.html(teco));
 
 app.get("/pokemons", (req, res) => res.json(pokemons))
 
