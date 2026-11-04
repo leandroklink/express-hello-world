@@ -37,7 +37,53 @@ app.get("/pokemons", (req, res) => {
 });
 
 
+// 4. POST /series → lista com 3 seriados favoritos
+app.post('/series', (req, res) => {
+  const series = [
+    { id: 1, titulo: 'Breaking Bad'},
+    { id: 2, titulo: 'Cowboy Bebop'},
+    { id: 3, titulo: 'Jujutsu Kaisen'},
+  ];
+  res.json(series);
+});
+
+// 5. Endpoints que simulam bugs em produção
+app.get('/bug', (req, res) => {
+  const usuario = undefined;
+  res.json({ nome: usuario.nome }); // TypeError → Express responde 500
+});
+
+app.get('/bug/manual', (req, res) => {
+  throw new Error('Falha simulada: conexão com o banco perdida');
+});
+
+// 6. Consumindo APIs públicas gratuitas
+app.get('/cep/:cep', async (req, res) => {
+  try {
+    const resposta = await fetch(`https://viacep.com.br/ws/${req.params.cep}/json/`);
+    const dados = await resposta.json();
+
+    if (dados.erro) {
+      return res.status(404).json({ mensagem: 'CEP não encontrado' });
+    }
+
+    res.json({
+      cep: dados.cep,
+      rua: dados.logradouro,
+      bairro: dados.bairro,
+      cidade: dados.localidade,
+      uf: dados.uf,
+    });
+  } catch (erro) {
+    res.status(500).json({ mensagem: 'Erro ao consultar a API externa' });
+  }
+});
+
+
+
+
 const teco = "teco"
+
 
 
 
