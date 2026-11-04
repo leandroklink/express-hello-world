@@ -17,7 +17,6 @@ app.get("/tico", (req, res) => res.type('html').send(teco));
 
 app.get("/pokemons", (req, res) => res.json(pokemons))
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 const pokemons = [
   { ordem: 1, nome: "Caterpie", tipo: "Inseto" },
@@ -132,7 +131,7 @@ const meuNome = `
   </head>
   <body>
     <section>
-      Hello Express API 
+      Meu nome é Leandro Klink
     </section>
   </body>
 </html>
@@ -188,3 +187,4 @@ const html = `
   </body>
 </html>
 `
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
